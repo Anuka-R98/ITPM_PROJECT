@@ -9,7 +9,7 @@ function App() {
       <Header />
       <main className='py-3'>
         <Container>
-          <h1>Welcome To DinoTech🦖</h1>
+          <h1>Welcome To Dino-Tech</h1>
         </Container>
 
       </main>
