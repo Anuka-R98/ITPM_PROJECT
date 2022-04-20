@@ -10,15 +10,42 @@
       content="Find the best products for the cheapest prices"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+      crossorigin="anonymous"
+    />
+    <!--cursor styles-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/kursor/dist/kursor.css">
+    <title>Welcome To DYNO-TECH</title>
 
-    <title>Welcome To DynoTech</title>
+    <style>
+      #footer:hover{
+        background-color: #103039;
+      }
+      #qty:hover{
+        background-color: #133C48;
+      }
+    </style>
+    <!--cursor script 1-->
+    <script src="https://cdn.jsdelivr.net/npm/kursor"></script>
+    <script src="https://cdn.jsdelivr.net/npm/kursor@0.0.14/dist/kursor.js"></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    
   </body>
+  <!--cursor styles 2-->
+  <script src="https://unpkg.com/kursor"></script>
+  <script>
+      new kursor({
+          type: 1,
+          removeDefaultCursor: true,
+          color: "#0AE7C9",   
+      })
+  </script>
+
 </html>
