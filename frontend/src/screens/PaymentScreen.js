@@ -23,6 +23,13 @@ const PaymentScreen = ({ history }) => {
     history.push('/placeorder')
   }
 
+  //Edit Shipping
+  const onClickHandler = (e) => {
+    e.preventDefault()
+    dispatch(savePaymentMethod(paymentMethod))
+    history.push('/shipping')
+  }
+
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 step3 />
@@ -51,10 +58,10 @@ const PaymentScreen = ({ history }) => {
           </Col>
         </Form.Group><br></br><br></br>
 
-        <Button type='submit' variant='primary' style={{backgroundColor:'#133C48'}}>
+        <Button type='submit' variant='primary' style={{ backgroundColor: '#133C48' }}>
           Continue
         </Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <Button  variant='primary' style={{backgroundColor:'#133C48'}}>
+        <Button onClick={onClickHandler} variant='primary' style={{ backgroundColor: '#133C48' }}>
           Edit Shipping
         </Button>
       </Form>
