@@ -28,7 +28,7 @@ const HomeScreen = ({ match }) => {
 
   return (
     <>
-     <Route render={({ history }) => <SearchBox history={history} />} /> <br/>
+     <Route render={({ history }) => <SearchBox history={ history } />} /> <br/>
       <Meta />
       {!keyword ? (
         <ProductCarousel />
