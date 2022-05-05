@@ -47,3 +47,4 @@ This project is used by the following companies:
 - Backend: Node JS,
 - Database: MongoDB/Firebase,
 - Main Language: JavaScript
+
