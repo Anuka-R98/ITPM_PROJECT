@@ -35,7 +35,7 @@ Start the server
 
 This project is used by the following companies:
 
-- Member 1 `IT20189594` `Rathnayaka R.K.A.R.`
+- Member 1 `IT20189594` `Rathnayaka R.K.A.R.` (Group Leader)
 - Member 2 `IT20200206` `Mallawarachchi S.M.A.`
 - Member 3 `IT20191788` `Wijesiriwardana H.G.N.D.`
 - Member 4 `IT20122850` `Perera S.S.A.`
