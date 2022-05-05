@@ -4,13 +4,20 @@ import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listOrders } from '../actions/orderActions'
+import { listOrders, deleteOrder } from '../actions/orderActions'
 
 const OrderListScreen = ({ history }) => {
   const dispatch = useDispatch()
 
   const orderList = useSelector((state) => state.orderList)
   const { loading, error, orders } = orderList
+
+  const orderDelete = useSelector((state) => state.orderDelete)
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = orderDelete
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -21,11 +28,19 @@ const OrderListScreen = ({ history }) => {
     } else {
       history.push('/login')
     }
-  }, [dispatch, history, userInfo])
+  }, [dispatch, history, userInfo, successDelete,])
+
+  const deleteHandler = (id) => {
+    if (window.confirm('Are you sure')) {
+      dispatch(deleteOrder(id))
+    }
+  }
 
   return (
     <>
       <h1>Orders</h1>
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -70,6 +85,14 @@ const OrderListScreen = ({ history }) => {
                       Details
                     </Button>
                   </LinkContainer>
+                  &nbsp;
+                  <Button
+                    variant='danger'
+                    className='btn-sm'
+                    onClick={() => deleteHandler(order._id)}
+                  >
+                    <i className='fas fa-trash'></i>
+                  </Button>
                 </td>
               </tr>
             ))}
