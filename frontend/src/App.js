@@ -17,6 +17,7 @@ import UserListScreen from './screens/UserListScreen'
 import UserListScreenS from './screens/UserListScreenS'
 import UserEditScreen from './screens/UserEditScreen'
 import ProductListScreen from './screens/ProductListScreen'
+import ProductListScreenS from './screens/ProductListScreenS'
 import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import OrderListScreenS from './screens/OrderListScreenS'
@@ -43,6 +44,7 @@ const App = () => {
           {/* search components */}
           <Route path='/admin/userlistS/search/:keyword?' component={UserListScreenS} />
           <Route path='/admin/orderlistS/search/:keyword' component={OrderListScreenS} />
+          <Route path='/admin/productlistS/search/:keyword?' component={ProductListScreenS} exact/>
 
           <Route
             path='/admin/productlist'
