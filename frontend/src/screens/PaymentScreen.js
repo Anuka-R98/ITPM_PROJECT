@@ -47,6 +47,22 @@ const PaymentScreen = ({ history }) => {
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
+            <Form.Check
+              type='radio'
+              label='Card Payment'
+              id='Card Payment'
+              name='paymentMethod'
+              value='Card Payment'
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            ></Form.Check>
+            <Form.Check
+              type='radio'
+              label='Cash On Delivery'
+              id='Cash On Delivery'
+              name='paymentMethod'
+              value='Cash On Delivery'
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            ></Form.Check>
             {/* <Form.Check
               type='radio'
               label='Stripe'
