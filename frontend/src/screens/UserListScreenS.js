@@ -7,6 +7,8 @@ import Loader from '../components/Loader'
 import { listUsers, deleteUser } from '../actions/userActions'
 import { Route } from 'react-router-dom'
 import UserSearchBox from '../components/UserSearchBox'
+import jspdf from 'jspdf'
+import "jspdf-autotable"
 
 const UserListScreen = ({ history, match }) => {
 
@@ -37,11 +39,56 @@ const UserListScreen = ({ history, match }) => {
     }
   }
 
+  // genarate pdf
+
+  const generatePDF = tickets => {
+    const doc = new jspdf();
+    const tableColumn = ["Id", "Name", "Email", "Admin"];
+    const tableRows = [];
+    const date = Date().split(" ");
+    const dateStr = date[1] + "-" + date[2] + "-" + date[3];
+
+    tickets.map(ticket => {
+    
+    const ticketData = [
+    ticket._id,
+    ticket.name,
+    ticket.email,
+    ticket.admin,
+    //ticket.designation,
+    //ticket.mail,
+    // ticket.type,
+    
+     ];
+    
+     tableRows.push(ticketData);
+    
+    })
+    
+      doc.text("DYNO_TECH", 70, 8).setFontSize(13);
+      
+      doc.text("Registered Users Report", 14, 16).setFontSize(13);
+      
+      doc.text(`Report Genarated Date - ${dateStr}`, 14, 23);
+      
+      //right down width height
+      
+    //doc.addImage(img, 'JPEG', 170, 8, 25, 25);
+      
+      doc.autoTable(tableColumn, tableRows, { styles: { fontSize: 8, }, startY:35});
+      
+      doc.save("Registered Users Report.pdf");
+    
+     };
+
   return (
     <>
       {/* <Route render={({ history }) => <UserSearchBox history={history} />} /> <br/> */}
       <UserSearchBox history={history} /><br/>
       <h1>Users</h1>
+      <div class="buttonn">
+      <button type="button" class="btn btn-primary" style={{backgroundColor:'#133C48'}} onClick={() => generatePDF(users)} >GenerateReport</button> <br></br>
+     </div>
       {loading ? (
         <Loader />
       ) : error ? (
