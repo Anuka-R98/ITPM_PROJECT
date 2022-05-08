@@ -110,7 +110,16 @@ const getMyOrders = asyncHandler(async (req, res) => {
 // @route   GET /api/orders
 // @access  Private/Admin
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({}).populate('user', 'id name')
+
+  const keyword = req.query.keyword ? {
+    paymentMethod : {
+      $regex: req.query.keyword,
+      // $option: 'i',
+    }
+
+  } : {}
+
+  const orders = await Order.find({...keyword}).populate('user', 'id name')
   res.json(orders)
 })
 

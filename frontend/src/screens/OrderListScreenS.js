@@ -6,10 +6,13 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listOrders, deleteOrder } from '../actions/orderActions'
 import OrderSearch from '../components/OrderSearch'
+import { Route } from 'react-router-dom'
+import axios from 'axios'
 
 const OrderListScreen = ({ history, match }) => {
 
   const keyword = match.params.keyword
+console.log(keyword)
 
   const dispatch = useDispatch()
 
@@ -40,11 +43,29 @@ const OrderListScreen = ({ history, match }) => {
     }
   }
 
+ 
+
   return (
     <>
+      {/* <div className='container'>
+      <div className='row'>
+        <div className='col-lg-9 mt-2 mb-2'>
+        <h1>Orders</h1>
+        </div>
+        <div className='col-lg-3 mt-2 mb-2'>
+          <input 
+          className='form-control'
+          type='search'
+          placeholder='Search Orders'
+          name='searchQuery'
+          onChange={handleSearchArea}>
 
-     <OrderSearch history={history} /> <br />
-     
+          </input>
+        </div>
+      </div>
+    </div> */}
+
+      <OrderSearch history={history} /> <br />
       <h1>Orders</h1>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}

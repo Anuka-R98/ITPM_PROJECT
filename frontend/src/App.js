@@ -19,6 +19,7 @@ import UserEditScreen from './screens/UserEditScreen'
 import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
+import OrderListScreenS from './screens/OrderListScreenS'
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
          
           {/* search components */}
           <Route path='/admin/userlistS/search/:keyword?' component={UserListScreenS} />
+          <Route path='/admin/orderlistS/search/:keyword' component={OrderListScreenS} />
 
           <Route
             path='/admin/productlist'
