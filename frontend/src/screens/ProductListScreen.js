@@ -4,6 +4,8 @@ import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import jspdf from 'jspdf'
+import "jspdf-autotable"
 import Paginate from '../components/Paginate'
 import {
   listProducts,
@@ -70,7 +72,42 @@ const ProductListScreen = ({ history, match }) => {
     dispatch(createProduct())
   }
 
+
+
+   // genarate pdf
+
+   const generatePDF = tickets => {
+
+    const doc = new jspdf();
+    const tableColumn = ["Id", "Name", "Price", "Category", "Brand"];
+    const tableRows = [];
+    const date = Date().split(" ");
+    const dateStr = date[1] + "-" + date[2] + "-" + date[3];
+
+    tickets.map(ticket => {
+        const ticketData = [
+            ticket._id,
+            ticket.name,
+            ticket.price,
+            ticket.category,
+            ticket.brand,
+            //ticket.designation,
+            //ticket.mail,
+           // ticket.type,
+        ];
+        tableRows.push(ticketData);
+    })
+    doc.text("DYNO_TECH", 70, 8).setFontSize(13);
+    doc.text("ProductReport", 14, 16).setFontSize(13);
+    doc.text(`Report Genarated Date - ${dateStr}`, 14, 23);
+    //right down width height
+    //doc.addImage(img, 'JPEG', 170, 8, 25, 25);
+    doc.autoTable(tableColumn, tableRows, { styles: { fontSize: 8, }, startY:35});
+    doc.save("Product Report.pdf");
+};
+
   return (
+
     <>
       <Row className='align-items-center'>
         <Col>
@@ -80,6 +117,13 @@ const ProductListScreen = ({ history, match }) => {
           <Button className='my-3' onClick={createProductHandler}>
             <i className='fas fa-plus'></i> Create Product
           </Button>
+
+          
+        <div class="buttonn">
+       <button type="button" class="btn btn-primary" style={{backgroundColor:'#133C48'}} onClick={() => generatePDF(products)} >GenerateReport</button> <br></br>
+            </div>
+
+
         </Col>
       </Row>
       {loadingDelete && <Loader />}
