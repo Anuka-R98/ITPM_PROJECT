@@ -6,13 +6,13 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listOrders, deleteOrder } from '../actions/orderActions'
 import OrderSearch from '../components/OrderSearch'
-import { Route } from 'react-router-dom'
-import axios from 'axios'
+
+import jspdf from 'jspdf'
+import "jspdf-autotable"
 
 const OrderListScreen = ({ history, match }) => {
 
   const keyword = match.params.keyword
-console.log(keyword)
 
   const dispatch = useDispatch()
 
@@ -43,30 +43,71 @@ console.log(keyword)
     }
   }
 
- 
+  // genarate pdf
+  const generatePDF = tickets => {
+
+    const doc = new jspdf();
+    const tableColumn = ["ID", "USER", "DATE", "TOTAL"];
+    const tableRows = [];
+    const date = Date().split(" ");
+    const dateStr = date[1] + "-" + date[2] + "-" + date[3];
+
+
+
+
+    tickets.map(ticket => {
+
+      const ticketData = [
+
+        ticket._id,
+        ticket.user.name,
+        ticket.createdAt.substring(0, 10),
+        ticket.totalPrice,
+        //ticket.designation,
+        //ticket.mail,
+        // ticket.type,
+      ];
+
+      tableRows.push(ticketData);
+
+    })
+
+    doc.text("DYNO_TECH", 70, 8).setFontSize(13);
+    doc.text("Cart Invoice", 14, 16).setFontSize(13);
+    doc.text(`Report Genarated Date - ${dateStr}`, 14, 23);
+
+    //right down width height
+    //doc.addImage(img, 'JPEG', 170, 8, 25, 25);
+
+    doc.autoTable(tableColumn, tableRows, { styles: { fontSize: 8, }, startY: 35 });
+
+    doc.save("Product Report.pdf");
+
+  };
+
 
   return (
     <>
-      {/* <div className='container'>
-      <div className='row'>
-        <div className='col-lg-9 mt-2 mb-2'>
-        <h1>Orders</h1>
-        </div>
-        <div className='col-lg-3 mt-2 mb-2'>
-          <input 
-          className='form-control'
-          type='search'
-          placeholder='Search Orders'
-          name='searchQuery'
-          onChange={handleSearchArea}>
+    
+    <div className='container'>
+        <div className='row'>
+          <div className='col-lg-8 mt-2 mb-2'>
+            <h1>Orders</h1>
+          </div>
+          {/* <div className='col-lg-5 mt-2 mb-2'> */}
+          <OrderSearch history={history} />
 
-          </input>
+
+          {/* </div> */}
         </div>
+
       </div>
-    </div> */}
+      <div class="buttonn" style={{ marginRight: '0%' }}>
+        <button type="button" class="btn btn-primary" style={{ backgroundColor: '#133C48' }} onClick={() => generatePDF(orders)} >GenerateReport</button> <br></br>
+      </div>
 
-      <OrderSearch history={history} /> <br />
-      <h1>Orders</h1>
+      <br />
+     
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loading ? (
