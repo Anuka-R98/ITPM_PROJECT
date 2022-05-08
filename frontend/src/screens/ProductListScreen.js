@@ -98,14 +98,14 @@ const ProductListScreen = ({ history, match }) => {
               ticket.price,
               ticket.category,
               ticket.brand,
-              //ticket.designation,
-              //ticket.mail,
-             // ticket.type,
+              
+              
+            
           ];
           tableRows.push(ticketData);
       })
       doc.text("DYNO_TECH", 70, 8).setFontSize(13);
-      doc.text("ProductReport", 14, 16).setFontSize(13);
+      doc.text("Product Report", 14, 16).setFontSize(13);
       doc.text(`Report Genarated Date - ${dateStr}`, 14, 23);
       //right down width height
       //doc.addImage(img, 'JPEG', 170, 8, 25, 25);
@@ -122,13 +122,10 @@ const ProductListScreen = ({ history, match }) => {
           <h1>Products</h1>
         </Col>
         
-
+        
         <div class="buttonn">
        <button type="button" class="btn btn-primary" style={{backgroundColor:'#133C48'}} onClick={() => generatePDF(products)} >GenerateReport</button> <br></br>
             </div>
-
-
-
 
         <Col className='text-right'style={{display: 'flex', justifyContent: 'right'}}>
           <Button className='my-3' style={{backgroundColor:'#133C48'}} onClick={createProductHandler}>
