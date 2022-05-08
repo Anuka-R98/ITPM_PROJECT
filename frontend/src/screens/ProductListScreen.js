@@ -8,6 +8,8 @@ import Paginate from '../components/Paginate'
 
 import jspdf from 'jspdf'
 import "jspdf-autotable"
+import img from '../components/logo.png';
+
 import {
   listProducts,
   deleteProduct,
@@ -108,7 +110,7 @@ const ProductListScreen = ({ history, match }) => {
       doc.text("Product Report", 14, 16).setFontSize(13);
       doc.text(`Report Genarated Date - ${dateStr}`, 14, 23);
       //right down width height
-      //doc.addImage(img, 'JPEG', 170, 8, 25, 25);
+      doc.addImage(img, 'JPEG', 170, 8, 25, 25);
       doc.autoTable(tableColumn, tableRows, { styles: { fontSize: 8, }, startY:35});
       doc.save("Product Report.pdf");
   };
