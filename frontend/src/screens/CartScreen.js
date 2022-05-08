@@ -31,47 +31,47 @@ const CartScreen = ({ match, location, history }) => {
     history.push('/login?redirect=shipping')
   }
 
-// // genarate pdf
-// const generatePDF = tickets => {
+// genarate pdf
+const generatePDF = tickets => {
 
-//       const doc = new jspdf();       
-//       const tableColumn = ["Name", "Price", "Quantity"];      
-//       const tableRows = [];        
-//       const date = Date().split(" ");        
-//       const dateStr = date[1] + "-" + date[2] + "-" + date[3];
+      const doc = new jspdf();       
+      const tableColumn = ["Name", "Price", "Quantity"];      
+      const tableRows = [];        
+      const date = Date().split(" ");        
+      const dateStr = date[1] + "-" + date[2] + "-" + date[3];
       
         
   
   
-//  tickets.map(ticket => {
+ tickets.map(ticket => {
   
-// const ticketData = [
+const ticketData = [
           
-//         ticket.name,     
-//         ticket.price,
-//         ticket.qty,    
-// // ticket.brand,       
-// //ticket.designation,
-// //ticket.mail,
-// // ticket.type,
-// ];
+        ticket.name,     
+        ticket.price,
+        ticket.qty,    
+// ticket.brand,       
+//ticket.designation,
+//ticket.mail,
+// ticket.type,
+];
   
-//  tableRows.push(ticketData);
+ tableRows.push(ticketData);
   
-//  })
+ })
   
-// doc.text("DYNO_TECH", 70, 8).setFontSize(13);
-// doc.text("Cart Invoice", 14, 16).setFontSize(13);
-//  doc.text(`Report Genarated Date - ${dateStr}`, 14, 23);
+doc.text("DYNO_TECH", 70, 8).setFontSize(13);
+doc.text("Cart Invoice", 14, 16).setFontSize(13);
+ doc.text(`Report Genarated Date - ${dateStr}`, 14, 23);
   
-// //right down width height
-// //doc.addImage(img, 'JPEG', 170, 8, 25, 25);
+//right down width height
+//doc.addImage(img, 'JPEG', 170, 8, 25, 25);
   
-//  doc.autoTable(tableColumn, tableRows, { styles: { fontSize: 8, }, startY:35});
+ doc.autoTable(tableColumn, tableRows, { styles: { fontSize: 8, }, startY:35});
   
-// doc.save("Product Report.pdf");
+doc.save("Product Report.pdf");
   
-//   };
+  };
 
   return (
     <Row>
@@ -148,9 +148,10 @@ const CartScreen = ({ match, location, history }) => {
               >
                 Proceed To Checkout
               </Button>
-              {/* <div class="buttonn">
-                <button type="button" class="btn btn-primary" style={{backgroundColor:'#133C48'}} onClick={() => generatePDF(cartItems)} >GenerateReport</button> <br></br>
-              </div> */}
+              <br /><br />
+              <div class="buttonn">
+                <button type="button" class="btn btn-primary" style={{backgroundColor:'#133C48',width:'380px'}} onClick={() => generatePDF(cartItems)} >GenerateReport</button> <br></br>
+              </div>
             </ListGroup.Item>
           </ListGroup>
         </Card>
