@@ -1,7 +1,7 @@
 
 # DYNO-TECH
 
-![Logo](https://github.com/Anuka-R98/ITPM_PROJECT/blob/IT20200206/frontend/public/images/DYNO_BLACK.png)
+![Logo](https://github.com/Anuka-R98/ITPM_PROJECT/blob/master/frontend/public/images/DYNO_GREEN.png)
 
 DYNO-TECH is an ecommerce web application which is primarily focused on selling electronic items through online. Customers can easily find and buy their desired electronic items from this website. Both admin and customer are two main users of the system.
 
