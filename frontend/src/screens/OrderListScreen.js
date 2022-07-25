@@ -7,8 +7,12 @@ import Loader from '../components/Loader'
 import { listOrders, deleteOrder } from '../actions/orderActions'
 import OrderSearch from '../components/OrderSearch'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import jspdf from 'jspdf'
 import "jspdf-autotable"
+import img from '../components/logo.png';
 
 const OrderListScreen = ({ history, match }) => {
 
@@ -40,74 +44,90 @@ const OrderListScreen = ({ history, match }) => {
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure')) {
       dispatch(deleteOrder(id))
+      toast.success('Deleted Successfully', { position: toast.POSITION.TOP_RIGHT, autoClose: false });
     }
+
   }
 
   // genarate pdf
-  const generatePDF = tickets => {
+  const generatePDF = Orders => {
 
     const doc = new jspdf();
-    const tableColumn = ["ID", "USER", "DATE", "TOTAL"];
+    const tableColumn = ["ID", "USER", "DATE", "PAY METHOD", "TOTAL"];
     const tableRows = [];
     const date = Date().split(" ");
     const dateStr = date[1] + "-" + date[2] + "-" + date[3];
 
 
+    Orders.map(order => {
 
+      const orderData = [
 
-    tickets.map(ticket => {
-
-      const ticketData = [
-
-        ticket._id,
-        ticket.user.name,
-        ticket.createdAt.substring(0, 10),
-        ticket.totalPrice,
+        order._id,
+        order.user.name,
+        order.createdAt.substring(0, 10),
+        order.paymentMethod,
+        order.totalPrice,
         //ticket.designation,
         //ticket.mail,
         // ticket.type,
       ];
 
-      tableRows.push(ticketData);
+      tableRows.push(orderData);
 
     })
-
-    doc.text("DYNO_TECH", 70, 8).setFontSize(13);
-    doc.text("Cart Invoice", 14, 16).setFontSize(13);
-    doc.text(`Report Genarated Date - ${dateStr}`, 14, 23);
+    doc.addImage(img, 'PNG', 68, 1, 75, 20);
+    
+    doc.text("Orders List Invoice", 14, 30).setFontSize(13);
+    doc.text(`Report Genarated Date : ${dateStr}`, 14, 37).setFontSize(11);
 
     //right down width height
     //doc.addImage(img, 'JPEG', 170, 8, 25, 25);
+    doc.autoTable(tableColumn, tableRows, { styles: { fontSize: 8, }, startY: 44 });
 
-    doc.autoTable(tableColumn, tableRows, { styles: { fontSize: 8, }, startY: 35 });
+    doc.save("Orders Report.pdf");
 
-    doc.save("Product Report.pdf");
-
+    toast.success('Report Generated Successfully', { position: toast.POSITION.TOP_CENTER, autoClose: 2000 });
   };
 
 
   return (
     <>
-
-      <div className='container'>
+      {/* <div className='container'>
         <div className='row'>
           <div className='col-lg-8 mt-2 mb-2'>
             <h1>Orders</h1>
           </div>
-          {/* <div className='col-lg-5 mt-2 mb-2'> */}
+          <div className='col-lg-1 mt-2 mb-2'>
           <OrderSearch history={history} />
+          <button type="button" class="btn btn-primary" style={{ backgroundColor: '#133C48' }} onClick={() => generatePDF(orders)} >GenerateReport</button> 
+
+          </div>
+        </div>
+
+      </div> */}
 
 
-          {/* </div> */}
+      <div class="container">
+        <div class="row" style={{ alignItems: 'center' }}>
+          <div class="col-md-offset-1 col-md-5" style={{ padding: '1rem 0' }}>
+            <h1>Orders</h1>
+          </div>
+          <div class="col-md-offset-1 col-md-5" style={{ padding: '1rem 1rem 1rem 0' }}>
+            <OrderSearch history={history} />
+          </div>
+          <div class="col-md-offset-1 col-md-2" style={{ padding: '1rem 0' }}>
+            <button type="button" class="btn btn-primary" style={{ backgroundColor: '#133C48' }} onClick={() => generatePDF(orders)} >
+              Generate Report
+            </button>
+            
+          </div>
         </div>
 
       </div>
-      <div class="buttonn" style={{ marginRight: '0%' }}>
-        <button type="button" class="btn btn-primary" style={{ backgroundColor: '#133C48' }} onClick={() => generatePDF(orders)} >GenerateReport</button> <br></br>
-      </div>
 
       <br />
-     
+
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loading ? (
@@ -150,7 +170,7 @@ const OrderListScreen = ({ history, match }) => {
                 </td>
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
-                    <Button variant='light' className='btn-sm'>
+                    <Button variant='darkbl' className='btn-sm'>
                       Details
                     </Button>
                   </LinkContainer>
@@ -162,6 +182,7 @@ const OrderListScreen = ({ history, match }) => {
                   >
                     <i className='fas fa-trash'></i>
                   </Button>
+                  <ToastContainer autoClose={false} />
                 </td>
               </tr>
             ))}

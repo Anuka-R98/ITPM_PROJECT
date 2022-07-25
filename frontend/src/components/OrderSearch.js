@@ -14,18 +14,28 @@ const OrderSearch = ({ history }) => {
   }
   console.log(keyword)
   return (
-    <Form onSubmit={ submitHandler } inline>
-      <Form.Control
-        type='text'
-        name='q'
-        onChange={(e) => setKeyword(e.target.value)}
-        placeholder='Search Orders'
-        className='mr-sm-2 ml-sm-5'
-      ></Form.Control>
-         <Button type='submit'  style={{backgroundColor:'#133C48'}}>
-        Search
-      </Button>
-    </Form>
+    <div class="container" style={{ padding: '1rem 0' }}>
+
+      <Form onSubmit={submitHandler} inline>
+        <div class="row">
+          <div class='col-9'>
+            <Form.Control
+              type='text'
+              name='q'
+              onChange={(e) => setKeyword(e.target.value)}
+              placeholder='Search Orders by Payment Method'
+              className='mr-sm-2 ml-sm-5'
+            ></Form.Control>
+          </div>
+          <div class='col-3' style={{ padding: '0 0' }}>
+            <Button type='submit' style={{ backgroundColor: '#133C48' }}>
+              Search
+            </Button>
+          </div>
+        </div>
+      </Form>
+
+    </div >
   )
 }
 
