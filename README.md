@@ -77,3 +77,9 @@ DYNO-TECH is an ecommerce web application which is primarily focused on selling 
 ```bash
   npm run dev
 ```
+
+#### Program Name :- DYNO-TECH (Web Application) 
+#### Status :- Completed
+#### Developed with :- React js, Nodejs, Mongo DB
+#### Features :- CRUD operations,  Redux, Routing, User Auth, Invetory handling, User/Admin functions......
+#### Goal :- To learn advanced concepts in React
